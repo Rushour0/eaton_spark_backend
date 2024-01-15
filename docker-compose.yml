@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+ flask:
+  container_name: eaton-flask
+  build:
+   context: ./
+   dockerfile: Dockerfile.server
+  command: python app.py
+  ports:
+   - 5000:5000
+  networks:
+   - server-network
+  restart: always
+
+ api-serveo:
+  container_name: eaton-api-serveo
+  build:
+   context: ./
+   dockerfile: Dockerfile.serveo
+  tty: true
+  stdin_open: true
+  command: python run.py
+  depends_on: 
+   - flask
+  networks:
+   - server-network
+  restart: always
+
+networks:
+ server-network:
+  driver: bridge

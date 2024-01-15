@@ -1,0 +1,21 @@
+
+
+# Use the official Python image as the base image
+FROM python:3.9
+
+# Set environment variables for Python and buffering
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Create and set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements.txt file to the container
+COPY ./run.py /app
+
+RUN mkdir ~/.ssh/
+RUN touch ~/.ssh/known_hosts
+RUN ssh-keygen -f /root/.ssh/id_rsa
+RUN echo "HOST *" > ~/.ssh/config
+RUN echo "StrictHostKeyChecking no" >> ~/.ssh/config
+RUN ssh-keyscan serveo.net >> /root/.ssh/known_hosts

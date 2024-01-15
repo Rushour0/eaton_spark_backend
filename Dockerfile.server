@@ -1,0 +1,20 @@
+# Use the official Python image as the base image
+FROM python:3.9
+
+# Set environment variables for Python and buffering
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Create and set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements.txt file to the container
+COPY ./server/requirements.txt /app
+
+# Install the required dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the Django project files to the container
+COPY ./server /app/
+
+EXPOSE 5000
