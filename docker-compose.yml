@@ -7,7 +7,7 @@ services:
    dockerfile: Dockerfile.server
   command: python app.py
   ports:
-   - 5000:5000
+   - 6000:6000
   networks:
    - server-network
   restart: always

@@ -32,7 +32,7 @@ def directions():
         origin=post_json['source'],
         destination=post_json['destination'],
         waypoints=post_json['waypoints'],
-        mode=post_json['mode'], 
+        mode=post_json['mode'],
         optimize_waypoints=post_json['optimize_waypoints'],
         departure_time=post_json['departure_time'],
     )
@@ -43,10 +43,12 @@ def autocomplete():
     args = request.args
     return gmaps.places_autocomplete(args.get('input'))
 
+
 @app.route('/autocomplete_query', methods=['POST'])
 def autocomplete_query():
     args = request.args
-    
-    return gmaps.places_autocomplete_query( args.get('query'))
 
-app.run(host='0.0.0.0', port=5000)
+    return gmaps.places_autocomplete_query(args.get('query'))
+
+
+app.run(host='0.0.0.0', port=6000)
